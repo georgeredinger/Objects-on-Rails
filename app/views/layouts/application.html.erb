@@ -1,0 +1,22 @@
+<!-- app/views/layouts/application.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ObjectsOnRuby</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="sidebar two columns">
+    <nav>
+    <ul>
+      <li><%= link_to "New post...", new_post_path %></li>
+    </ul>
+    </nav>
+  </div>
+
+  <%= yield %>
+
+</body>
+</html>
