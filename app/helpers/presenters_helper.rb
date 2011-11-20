@@ -4,11 +4,12 @@ module PresentersHelper
     # Doing a string comparison because of Rails class-reloading weirdness
     case model.class.name
     when 'Post'
-      if model.picture?
+     model = if model.picture?
         PicturePostPresenter.new(model, template)
       else
         TextPostPresenter.new(model, template)
       end
+      LinkPresenter.new(model, template)
     else
       model
     end

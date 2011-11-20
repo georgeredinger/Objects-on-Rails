@@ -1,6 +1,7 @@
 # app/controllers/posts_controller.rb
-
 class PostsController < ApplicationController
+  respond_to :html,:json
+  include PresentersHelper
 
   def new
     @post = @blog.new_post
@@ -14,6 +15,13 @@ class PostsController < ApplicationController
       render "new"
     end
   end
+
+  def show
+    @post = present(@blog.entries[params[:id].to_i],self)
+    respond_with(@post)
+  end
+
+
 end
  
 
