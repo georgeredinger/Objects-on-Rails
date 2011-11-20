@@ -6,6 +6,10 @@ class Blog
     @entries = []
   end
 
+  def entries
+    @entries.sort_by{|e| e.pubdate}.reverse.take(10)
+  end
+
   def title
     "Watching Paint Dry"
   end
@@ -13,7 +17,7 @@ class Blog
     "The trusted source for drying paint news & opinion"
   end
   def add_entry(entry)
-    entries << entry
+    @entries << entry
   end
   def new_post(*args)
     post_maker.call(*args).tap do |p|

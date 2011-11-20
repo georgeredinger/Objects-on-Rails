@@ -1,16 +1,42 @@
 # spec/models/post_spec.rb
 require_relative '../spec_helper_lite'
 require 'minitest/autorun'
-stub_module 'ActiveModel::Conversion'
-stub_module 'ActiveModel::Naming'
+require 'active_model'
 require_relative '../../app/models/post'
-require 'ostruct'
 require 'date'
 
 describe Post do
   before do
     @it = Post.new
   end
+
+  describe "#picture?" do
+    it "should be true when the post has a picture URL" do
+      @it.image_url = "http://example.org/foo.png"
+      assert(@it.picture?)
+    end
+
+    it "should be false when the post has no picture URL" do
+      @it.image_url = ""
+      refute(@it.picture?)
+    end
+  end
+
+  describe "#publish" do
+    describe "given an invalid post" do
+      before do @it.title = nil end
+
+      it "should not add the post to the blog" do
+        dont_allow(@blog).add_entry
+        @it.publish
+      end
+
+      it "should return false" do
+        refute(@it.publish)
+      end
+    end
+  end
+
   describe "#pubdate" do
     describe "before publishing" do
       it "should be blank" do

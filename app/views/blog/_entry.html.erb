@@ -1,9 +1,9 @@
-
 <!-- app/views/blog/_entry.html.erb -->
+<% entry = present(entry, self) %>
 <article>
   <header>
    <p><time pubdate="pubdate"><%= entry.pubdate %></time></p>
    <h3><%= entry.title %></h3>
   </header>
-  <p><%= entry.body %></p>
+  <p><%= entry.render_body %></p>
 </article>
